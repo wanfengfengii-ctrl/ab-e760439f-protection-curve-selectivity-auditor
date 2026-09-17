@@ -1,0 +1,54 @@
+# 配电柜保护曲线选择性审查 —— 编排
+#
+#   docker compose up -d --build web api      # 启动长期服务
+#   docker compose run --rm verify            # 一次性端到端验收（成功即退出）
+#   docker compose up --build verify          # 等价：构建并运行验收后退出
+#
+# 宿主端口可用环境变量覆盖：
+#   WEB_PORT=8080 API_PORT=9000 docker compose up -d --build
+
+x-api-health: &api-health
+  test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).status==200 else 1)"]
+  interval: 3s
+  timeout: 3s
+  retries: 20
+  start_period: 5s
+
+x-web-health: &web-health
+  # nginx:alpine 自带 busybox wget，无需额外安装。
+  test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+  interval: 3s
+  timeout: 3s
+  retries: 20
+  start_period: 5s
+
+services:
+  api:
+    build: ./backend
+    environment:
+      PYTHONUNBUFFERED: "1"
+    ports:
+      # 宿主 API_PORT（默认 8000）-> 容器 8000
+      - "${API_PORT:-8000}:8000"
+    healthcheck: *api-health
+
+  web:
+    build:
+      context: ./frontend
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      # 宿主 WEB_PORT（默认 8080）-> 容器 nginx 80
+      - "${WEB_PORT:-8080}:80"
+    healthcheck: *web-health
+
+  verify:
+    build: ./verify
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    # 一次性服务：验收完成即退出，不暴露端口、不重启。
+    restart: "no"

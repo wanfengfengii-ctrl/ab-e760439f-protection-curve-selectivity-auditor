@@ -1,0 +1,152 @@
+:root {
+  --blue: #1d4ed8;
+  --red: #b91c1c;
+  --red-bg: #fef2f2;
+  --green: #15803d;
+  --green-bg: #f0fdf4;
+  --border: #cbd5e1;
+  --panel: #ffffff;
+  --bg: #f1f5f9;
+  --ink: #0f172a;
+  font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.app { max-width: 1400px; margin: 0 auto; padding: 20px 24px 48px; }
+
+.app-header h1 { font-size: 22px; margin: 0 0 6px; }
+.subtitle { color: #475569; margin: 0 0 18px; font-size: 14px; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(360px, 460px) 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.panel h2 { font-size: 15px; margin: 0 0 10px; }
+
+.panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.panel-head h2 { margin: 0; }
+.panel-actions { display: flex; gap: 8px; }
+
+.json-editor {
+  width: 100%;
+  min-height: 420px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  resize: vertical;
+  tab-size: 2;
+}
+
+.json-editor:focus { outline: 2px solid #93c5fd; border-color: #60a5fa; }
+
+.actions { display: flex; gap: 10px; margin-bottom: 14px; }
+
+.btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn:hover { background: #f8fafc; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.btn.primary:hover { background: #1e40af; }
+.btn.ghost { background: transparent; }
+
+.error-panel {
+  background: var(--red-bg);
+  border: 1px solid #fca5a5;
+  color: #7f1d1d;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.error-list { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.error-list li { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; font-size: 13px; }
+.error-path {
+  background: #fee2e2;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.error-msg { color: #991b1b; }
+
+.summary { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: #334155; }
+
+.chart-panel { padding: 8px; }
+.chart { width: 100%; height: auto; display: block; }
+.tick { font-size: 11px; fill: #475569; }
+.axis-title { font-size: 13px; fill: #334155; }
+.legend-text { font-size: 12px; fill: #1e293b; }
+.band { cursor: pointer; }
+
+.safe-banner {
+  background: var(--green-bg);
+  border: 1px solid #86efac;
+  color: var(--green);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 15px;
+  margin: 0;
+}
+
+.danger-hint { color: #b91c1c; font-size: 13px; margin: 0 0 10px; }
+
+.interval-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.interval-row {
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.12s, box-shadow 0.12s;
+}
+.interval-row.hovered {
+  background: #fef2f2;
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.15);
+}
+.interval-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.interval-index { font-weight: 700; color: var(--red); }
+.interval-range { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; }
+.zero-tag {
+  font-size: 11px;
+  background: #fde68a;
+  color: #92400e;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+.interval-meta { font-size: 13px; color: #334155; }
+
+.placeholder p { margin: 0 0 8px; }
+.placeholder .muted { color: #64748b; font-size: 13px; line-height: 1.7; }

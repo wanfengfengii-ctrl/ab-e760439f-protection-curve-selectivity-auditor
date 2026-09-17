@@ -1,4 +1,27 @@
+# ---- 操作系统 ----
 .DS_Store
+
+# ---- 环境变量 ----
 .env
+.env.*
+
+# ---- Node / 前端 ----
 node_modules/
+frontend/dist
+frontend/coverage
+frontend/test-results
+frontend/playwright-report
+frontend/.vite
+
+# ---- Python / 后端 ----
 __pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache
+backend/.venv
+.venv
+venv
+
+# ---- 本地为运行 Playwright 而解包的系统库与 apt 缓存（非项目产物）----
+.syslibs/
+.npm-cache/
