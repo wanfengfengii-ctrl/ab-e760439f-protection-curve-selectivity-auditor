@@ -1,4 +1,21 @@
 .DS_Store
 .env
-node_modules/
+
+# Python
 __pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Node / 前端产物
+node_modules/
+dist/
+.vite/
+
+# 测试产物
+test-results/
+playwright-report/
+*.tsbuildinfo
+
+# 日志
+*.log

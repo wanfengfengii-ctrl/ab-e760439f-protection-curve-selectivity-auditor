@@ -1,0 +1,41 @@
+services:
+  api:
+    build: ./api
+    ports:
+      - "${API_PORT:-8000}:8000"
+    healthcheck:
+      # 同样显式走 IPv4，避免容器内 localhost 解析为 ::1 后再回退。
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')",
+        ]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  web:
+    build: ./web
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+    healthcheck:
+      # 必须用 127.0.0.1 而非 localhost：nginx 仅监听 IPv4，而 musl 将
+      # localhost 解析为 ::1 优先，busybox wget 命中 ::1 被拒后不回退 IPv4，
+      # 会导致健康检查恒失败、verify 的 service_healthy 条件永不放行。
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  # 一次性验收服务：依赖健康的 api 与 web，跑完 pytest 即退出
+  verify:
+    build: ./verify
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy

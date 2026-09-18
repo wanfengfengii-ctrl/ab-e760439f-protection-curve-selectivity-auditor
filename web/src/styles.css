@@ -1,0 +1,181 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+
+.hint {
+  margin: 0 0 18px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.editor {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.editor-toolbar label {
+  font-weight: 600;
+  font-size: 14px;
+  flex: 1;
+}
+
+button {
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+textarea {
+  width: 100%;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px;
+  resize: vertical;
+  background: #f8fafc;
+}
+
+.errors {
+  margin-top: 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.errors h2 {
+  font-size: 15px;
+  color: #b91c1c;
+  margin: 0 0 8px;
+}
+
+.errors ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.errors li {
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.errors code {
+  background: #fee2e2;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-right: 6px;
+}
+
+.errors .code {
+  color: #b91c1c;
+  font-size: 12px;
+}
+
+.result {
+  margin-top: 16px;
+}
+
+.verdict {
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.verdict.pass {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+}
+
+.verdict.fail {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.interval-table {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.interval-table th,
+.interval-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.interval-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+
+.interval-table td.num {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+}
+
+.interval-table tr.highlighted td {
+  background: #fee2e2;
+}
+
+.interval-table tbody tr {
+  cursor: default;
+}
+
+svg[data-testid='chart'] {
+  width: 100%;
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
